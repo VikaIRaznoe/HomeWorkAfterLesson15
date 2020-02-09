@@ -3,22 +3,18 @@ package tests;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
-import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
-
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
-import java.util.HashMap;
+
 
 public class WikiTest {
     private AppiumDriver<MobileElement> driver;
@@ -215,7 +211,7 @@ public class WikiTest {
         driver.hideKeyboard();
         searchClick.sendKeys("java");
         //5)Скролим вниз в течении 20 сек
-        scrollUp(20);
+        scrollUp(25);
         //scrollDown(10);
         //6)Находим элемент с текстом 'Java virtual machine'
         WebElement searchText = waitForElementPresentRefact(By.xpath("//*[contains(@text,'Java virtual machine')]"),5);
@@ -256,7 +252,8 @@ public class WikiTest {
         //3)Переварачиваем экран
         driver.runAppInBackground(Duration.ofSeconds(3));
         //4)Смотрим наличие кнопки "LOG IN/JOIN WIKIPEDIA" после переворота экрана.
-        WebElement searchElementAfterBackGroundAfterBackGround = waitForElementPresentRefact(By.xpath("//*[contains(@text,'Settings')]"),5);
+        //WebElement searchElementAfterBackGroundAfterBackGround = waitForElementNotPresent(By.xpath("//*[contains(@text,'Settings')]"),5);
+        Assert.assertTrue(waitForElementNotPresent(By.xpath("//*[contains(@text,'Settings')]"),5));
     }
 
     //Тест на ПРОВЕРКУ ИСЧЕЗНОВЕНИЯ ЭЛЕМЕНТА
